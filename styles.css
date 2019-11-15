@@ -1,0 +1,13 @@
+#gotomeeting_tbl_actions td{
+    margin-top:12px;
+    float:left;
+    border: 0;
+}
+
+#gotomeeting_dv_update_users{
+    overflow-x: auto;
+}
+
+#gotomeeting_dv_update_users table{
+    width: 100%;
+}

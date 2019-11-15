@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/gotomeeting/db" VERSION="20101203" COMMENT="XMLDB file for Moodle mod/gotomeeting"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
+  <TABLES>
+    <TABLE NAME="gotomeeting" COMMENT="Each record is one GoToMeeting session">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Course gotomeeting activity belongs to"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="name field for moodle instances"/>
+        <FIELD NAME="intro" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="General introduction of the gotomeeting activity"/>
+        <FIELD NAME="introformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Format of the intro field (MOODLE, HTML, MARKDOWN...)"/>
+        <FIELD NAME="gotomeeting_datetime" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="gotomeeting_datetime_end" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="class_timezone" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="duration" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="30" SEQUENCE="false"/>
+        <FIELD NAME="presenter_id" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="lasteditorid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="class_status" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="gotomeeting_id" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="gotomeeting_joinurl" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="gotomeeting_license_id" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="gotomeetinglicenseid" TYPE="foreign" FIELDS="gotomeeting_license_id" REFTABLE="gotomeeting_licenses" REFFIELDS="id" COMMENT="The id field of the gotomeeting_licenses table."/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="gotomeeting_attendace_report" COMMENT="Default comment for gotomeeting, please edit me">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="attendee_name" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="attendee name"/>
+        <FIELD NAME="gotomeetingid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="gotomeetingid"/>
+        <FIELD NAME="join_time" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Attendee Join Time"/>
+        <FIELD NAME="leave_time" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Attendee Leave Time"/>
+        <FIELD NAME="duration" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Attendee Duration in Minutes"/>
+        <FIELD NAME="attendee_email" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="Ateendee Email"/>
+        <FIELD NAME="meeting_start_time" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Meeting start time"/>
+        <FIELD NAME="meeting_end_time" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Meeting end time"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="User id"/>
+        <FIELD NAME="updated" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Updated"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="gotomeeting_licenses" COMMENT="Default comment for gotomeeting, please edit me">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="name"/>
+        <FIELD NAME="consumer_key" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Consumer Key"/>
+        <FIELD NAME="consumer_secret" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Consumer Key"/>
+        <FIELD NAME="deleted" TYPE="int" LENGTH="1" NOTNULL="false" SEQUENCE="false" COMMENT="Is register deleted"/>
+        <FIELD NAME="data" TYPE="char" LENGTH="1024" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="state" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+
+  </TABLES>
+</XMLDB>
