@@ -119,6 +119,7 @@ function gotomeeting_add_instance(stdClass $gotomeeting, mod_gotomeeting_mod_for
         $gotomeeting->gotomeeting_id = $return[0]['meetingid'];
         $gotomeeting->gotomeeting_joinurl = $return[0]['joinURL'];
         $gotomeeting->gotomeeting_datetime_end = strtotime('+' . $classduration . ' minutes', $gotomeeting->gotomeeting_datetime);
+        $gotomeeting->class_timezone = $gotomeeting->gotomeeting_timezone;
         $returnid = $DB->insert_record('gotomeeting', $gotomeeting);
         $event = new stdClass();
         $event->name        = format_string($gotomeeting->name);
